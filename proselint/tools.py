@@ -90,7 +90,7 @@ def memoize(f):
     if not os.path.isdir(cache_dirname):
         original_umask = os.umask(0)
         try:
-            os.makedirs(cache_dirname, mode=0o0777, exist_ok=True)
+            os.makedirs(cache_dirname, mode=0o0777)
         finally:
             os.umask(original_umask)
 
