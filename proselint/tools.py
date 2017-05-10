@@ -16,7 +16,6 @@ import hashlib
 import json
 import importlib
 from tempfile import gettempdir
-import pickle
 
 try:
     import dbm
@@ -112,7 +111,7 @@ def memoize(f):
         try:
             cache = _get_cache(cachepath)
             return cache[key]
-        except (KeyError, pickle.UnpicklingError):
+        except KeyError:
             value = f(*args, **kwargs)
             cache[key] = value
             cache.sync()
