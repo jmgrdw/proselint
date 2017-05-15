@@ -84,7 +84,7 @@ def _get_cache(cachepath):
 def memoize(f):
     """Cache results of computations on disk."""
     # Determine the location of the cache.
-    cache_dirname = os.path.join(gettempdir(), ".proselint", str(os.getpid()))[1:]
+    cache_dirname = os.path.join(gettempdir(), ".proselint", str(os.getpid()))
 
     # Create the cache if it does not already exist.
     if not os.path.isdir(cache_dirname):
@@ -92,7 +92,7 @@ def memoize(f):
         print(cache_dirname)
         print("*************")
         os.system("sudo mkdir -p {0}".format(cache_dirname))
-        os.system("sudo chmod -R 0775 {0}".format(cache_dirname))
+        os.system("sudo chmod -R 777 {0}".format(cache_dirname))
 
     cache_filename = f.__module__ + "." + f.__name__
     cachepath = os.path.join(cache_dirname, cache_filename)
