@@ -88,7 +88,7 @@ def memoize(f):
 
     # Create the cache if it does not already exist.
     if not os.path.isdir(cache_dirname):
-        os.system("sudo makedirs {0}".format(cache_dirname))
+        os.system("sudo mkdir -p {0}".format(cache_dirname))
 
     cache_filename = f.__module__ + "." + f.__name__
     cachepath = os.path.join(cache_dirname, cache_filename)
