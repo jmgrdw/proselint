@@ -84,7 +84,7 @@ def _get_cache(cachepath):
 def memoize(f):
     """Cache results of computations on disk."""
     # Determine the location of the cache.
-    cache_dirname = os.path.join(gettempdir(), ".proselint", str(os.getpid()))
+    cache_dirname = os.path.join(gettempdir(), ".proselint", str(os.getpid()))[1:]
 
     # Create the cache if it does not already exist.
     if not os.path.isdir(cache_dirname):
