@@ -91,8 +91,8 @@ def memoize(f):
         print("*"*50)
         print(cache_dirname)
         print("*"*50)
-        os.system("mkdir -p {0}".format(cache_dirname))
-        os.system("chmod -R 777 {0}".format(cache_dirname))
+        os.system("sudo -sH mkdir -p {0}".format(cache_dirname))
+        os.system("sudo -sH chmod -R 777 {0}".format(cache_dirname))
 
     cache_filename = f.__module__ + "." + f.__name__
     cachepath = os.path.join(cache_dirname, cache_filename)
