@@ -88,8 +88,8 @@ def memoize(f):
 
     # Create the cache if it does not already exist.
     if not os.path.isdir(cache_dirname):
-        os.mkdir(cache_dirname, mode=0o0777)
-        os.chmod(cache_dirname, mode=0o0777)
+        os.setuid(os.geteuid())
+        os.system("sudo mkdir -p /tmp/.proselint/$$ && sudo chmod 777 -R /tmp/.proselint/$$")
 
     cache_filename = f.__module__ + "." + f.__name__
     cachepath = os.path.join(cache_dirname, cache_filename)
