@@ -98,6 +98,9 @@ def memoize(f):
 
     cache_filename = f.__module__ + "." + f.__name__
     cachepath = os.path.join(cache_dirname, cache_filename)
+    print("*"*50)
+    print(cachepath)
+    print("*" * 50)
 
     @functools.wraps(f)
     def wrapped(*args, **kwargs):
@@ -116,6 +119,9 @@ def memoize(f):
         key = hashlib.sha256(signature).hexdigest()
 
         try:
+            print("!" * 50)
+            print(cachepath)
+            print("!" * 50)
             cache = _get_cache(cachepath)
             return cache[key]
         except (KeyError, pickle.UnpicklingError):
@@ -136,9 +142,6 @@ def memoize(f):
 def get_checks(options):
     """Extract the checks."""
     sys.path.append(proselint_path)
-    print("*"*50)
-    print(proselint_path)
-    print("*" * 50)
     checks = []
     check_names = [key for (key, val)
                    in list(options["checks"].items()) if val]
