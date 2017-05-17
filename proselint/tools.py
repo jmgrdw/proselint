@@ -86,7 +86,7 @@ def memoize(f):
     """Cache results of computations on disk."""
     # Determine the location of the cache.
     pid = str(os.getpid())
-    cache_dirname_prefix = "pid_{0}".format(cache_dirname_prefix)
+    cache_dirname_prefix = "pid_{0}".format(str(os.getpid()))
     cache_dirname = None
 
     for dir in os.listdir(gettempdir()):
