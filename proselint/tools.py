@@ -52,6 +52,9 @@ def close_cache_shelves_after(f):
 
 
 def _get_cache(cachepath):
+    print("-"*50)
+    print(_cache_shelves)
+    print("-" * 50)
     if cachepath in _cache_shelves:
         return _cache_shelves[cachepath]
 
