@@ -1,3 +1,3 @@
 """Proselint version number."""
 
-__version__ = "0.6.999995"
+__version__ = "0.6.999996"
