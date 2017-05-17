@@ -94,7 +94,7 @@ def memoize(f):
             cache_dirname = dir
 
     if cache_dirname is None:
-        cache_dirname = tempfile.TemporaryDirectory(prefix=cache_dirname_prefix)
+        cache_dirname = tempfile.mkdtemp(prefix=cache_dirname_prefix)
 
     cache_filename = f.__module__ + "." + f.__name__
     cachepath = os.path.join(cache_dirname, cache_filename)
