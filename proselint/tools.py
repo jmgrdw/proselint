@@ -16,7 +16,7 @@ import hashlib
 import json
 import importlib
 import pickle
-from tempfile import gettempdir
+from datetime import datetime
 import tempfile
 
 try:
@@ -52,10 +52,6 @@ def close_cache_shelves_after(f):
 
 
 def _get_cache(cachepath):
-    print("-"*50)
-    print(_cache_shelves)
-    print(cachepath)
-    print("-" * 50)
     if cachepath in _cache_shelves:
         return _cache_shelves[cachepath]
 
@@ -90,14 +86,10 @@ def memoize(f):
     """Cache results of computations on disk."""
     # Determine the location of the cache.
     pid = str(os.getpid())
-    cache_dirname_prefix = "pid_{0}_".format(pid)
+    cache_dirname_prefix = "proselint_{0}_{1}_".format(datetime.now().strftime("%Y-%m-%d"), pid)
     cache_dirname = None
 
-    print("@"*50)
-    print(gettempdir())
-    print("@" * 50)
-
-    for dir in os.listdir(gettempdir()):
+    for dir in os.listdir(tempfile.gettempdir()):
         if dir.startswith(cache_dirname_prefix):
             cache_dirname = dir
 
@@ -105,10 +97,7 @@ def memoize(f):
         cache_dirname = tempfile.mkdtemp(prefix=cache_dirname_prefix)
 
     cache_filename = f.__module__ + "." + f.__name__
-    cachepath = os.path.join(gettempdir(), cache_dirname, cache_filename)
-    print("*"*50)
-    print(cachepath)
-    print("*"*50)
+    cachepath = os.path.join(tempfile.gettempdir(), cache_dirname, cache_filename)
 
     @functools.wraps(f)
     def wrapped(*args, **kwargs):
@@ -127,9 +116,6 @@ def memoize(f):
         key = hashlib.sha256(signature).hexdigest()
 
         try:
-            print("!" * 50)
-            print(cachepath)
-            print("!" * 50)
             cache = _get_cache(cachepath)
             return cache[key]
         except (KeyError, pickle.UnpicklingError):
