@@ -54,6 +54,7 @@ def close_cache_shelves_after(f):
 def _get_cache(cachepath):
     print("-"*50)
     print(_cache_shelves)
+    print(cachepath)
     print("-" * 50)
     if cachepath in _cache_shelves:
         return _cache_shelves[cachepath]
@@ -92,6 +93,10 @@ def memoize(f):
     cache_dirname_prefix = "pid_{0}_".format(pid)
     cache_dirname = None
 
+    print("@"*50)
+    print(gettempdir())
+    print("@" * 50)
+
     for dir in os.listdir(gettempdir()):
         if dir.startswith(cache_dirname_prefix):
             cache_dirname = dir
@@ -100,7 +105,7 @@ def memoize(f):
         cache_dirname = tempfile.mkdtemp(prefix=cache_dirname_prefix)
 
     cache_filename = f.__module__ + "." + f.__name__
-    cachepath = os.path.join(cache_dirname, cache_filename)
+    cachepath = os.path.join(gettempdir(), cache_dirname, cache_filename)
     print("*"*50)
     print(cachepath)
     print("*"*50)
