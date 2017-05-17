@@ -86,7 +86,7 @@ def memoize(f):
     """Cache results of computations on disk."""
     # Determine the location of the cache.
     pid = str(os.getpid())
-    cache_dirname_prefix = "pid_{0}".format(str(os.getpid()))
+    cache_dirname_prefix = "pid_{0}_".format(pid)
     cache_dirname = None
 
     for dir in os.listdir(gettempdir()):
@@ -136,6 +136,9 @@ def memoize(f):
 def get_checks(options):
     """Extract the checks."""
     sys.path.append(proselint_path)
+    print("*"*50)
+    print(proselint_path)
+    print("*" * 50)
     checks = []
     check_names = [key for (key, val)
                    in list(options["checks"].items()) if val]
