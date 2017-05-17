@@ -100,7 +100,7 @@ def memoize(f):
     cachepath = os.path.join(cache_dirname, cache_filename)
     print("*"*50)
     print(cachepath)
-    print("*" * 50)
+    print("*"*50)
 
     @functools.wraps(f)
     def wrapped(*args, **kwargs):
