@@ -85,7 +85,7 @@ def _get_cache(cachepath):
 def memoize(f):
     """Cache results of computations on disk."""
     # Determine the location of the cache.
-    cache_dirname = tempfile.TemporaryDirectory(prefix="pid_{0}_".format(str(os.getpid())))
+    cache_dirname = tempfile.TemporaryDirectory(prefix="pid_{0}_".format(str(os.getpid()))).name
 
     cache_filename = f.__module__ + "." + f.__name__
     cachepath = os.path.join(cache_dirname, cache_filename)
